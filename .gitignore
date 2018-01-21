@@ -1,0 +1,14 @@
+# Distribution
+caburj.github.io/build/
+
+# elm-package generated files
+caburj.github.io/elm-stuff/
+
+# elm-repl generated files
+repl-temp-*
+
+# Dependency directories
+caburj.github.io/node_modules/
+
+# Desktop Services Store on macOS
+.DS_Store
