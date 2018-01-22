@@ -11,14 +11,14 @@ body {
   transform: translate(-50%, -50%);
 }
 
-img {
+#content > img {
   max-width: 200px;
   border-radius: 50%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.button {
+a.button {
   /* color: rgb(21, 76, 139);
   border: solid 2px rgb(21, 76, 139); */
   color: rgb(27, 27, 27);
@@ -33,18 +33,31 @@ img {
   transition: all .3s ease-in-out;
 }
 
-.button:hover {
+a.button:hover {
   color: white;
   background: rgb(27, 27, 27);
   /* background: rgb(21, 76, 139); */
 }
 
-.links ul {
-  padding:0;
+.links {
+  position: relative;
 }
+
+.links ul.social {
+  padding: 0;
+}
+
+.links ul.works {
+  padding: 0;
+  position: absolute;
+  top: 0px;
+  left: 40%;
+}
+
 .links li {
-  display:inline;
-  margin-left: 10px;
+  display: inline;
+  margin-left: 6px;
+  margin-right: 6px;
 }
 
 h2, h4, p {
@@ -53,4 +66,41 @@ h2, h4, p {
 
 blockquote.blockquote:hover {
   cursor: pointer;
+}
+
+blockquote p {
+  color: rgb(70, 70, 70);
+  font-size: 0.95em;
+}
+
+.links-toggle {
+  color: rgb(27, 27, 27);
+  border: solid 2px rgb(27, 27, 27);
+  border-radius: 20px;
+  display: inline-block;
+  width: 250px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 5px;
+  margin-top: 10px;
+  transition: all .3s ease-in-out;
+}
+
+.links-toggle:hover {
+  color: white;
+  background: rgb(27, 27, 27);
+  cursor: pointer;
+  /* background: rgb(21, 76, 139); */
+}
+
+.m-fadeOut {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 750ms, opacity 750ms;
+}
+.m-fadeIn {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 750ms;
 }

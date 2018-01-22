@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick)
+import Html.Events exposing (onClick, onMouseOver)
 import Http
 import Json.Decode as Decode exposing (string)
 
@@ -11,12 +11,14 @@ import Json.Decode as Decode exposing (string)
 
 
 type alias Model =
-    { joke : String }
+    { joke : String
+    , toggleLinks : Bool
+    }
 
 
 init : ( Model, Cmd Msg )
 init =
-    Model "Fetching random dad joke..." ! [ getJoke ]
+    Model "Fetching random dad joke..." True ! [ getJoke ]
 
 
 
@@ -26,6 +28,7 @@ init =
 type Msg
     = MoreJoke
     | NewJoke (Result Http.Error String)
+    | ToggleLinks
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -35,10 +38,13 @@ update msg model =
             model ! [ getJoke ]
 
         NewJoke (Ok newJoke) ->
-            Model newJoke ! []
+            { model | joke = newJoke } ! []
 
         NewJoke (Err _) ->
-            Model "What time did the man go to the dentist? Tooth hurt-y." ! []
+            { model | joke = "What time did the man go to the dentist? Tooth hurt-y." } ! []
+
+        ToggleLinks ->
+            { model | toggleLinks = not model.toggleLinks } ! []
 
 
 
@@ -47,6 +53,19 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
+    let
+        toggleMessage =
+            if model.toggleLinks then
+                "Interested in my works?"
+            else
+                "More on social media?"
+
+        ( socialClass, worksClass ) =
+            if model.toggleLinks then
+                ( "m-fadeIn", "m-fadeOut" )
+            else
+                ( "m-fadeOut", "m-fadeIn" )
+    in
     div [ id "content" ]
         [ h2 [] [ text "Joseph Caburnay" ]
         , h4 [] [ text "@caburj" ]
@@ -59,7 +78,7 @@ view model =
                 [ text model.joke ]
             ]
         , div [ class "links" ]
-            [ ul []
+            [ ul [ class ("social " ++ socialClass) ]
                 [ li []
                     [ a
                         [ class "button"
@@ -93,7 +112,19 @@ view model =
                         [ i [ class "fa fa-medium" ] [] ]
                     ]
                 ]
+            , ul [ class ("works " ++ worksClass) ]
+                [ li []
+                    [ a
+                        [ class "button"
+                        , href "https://transaccion.netlify.com"
+                        , target "blank_"
+                        ]
+                        [ i [ class "fa fa-book" ] [] ]
+                    ]
+                ]
             ]
+        , div [ class "links-toggle", onMouseOver ToggleLinks, onClick ToggleLinks ]
+            [ text toggleMessage ]
         ]
 
 
