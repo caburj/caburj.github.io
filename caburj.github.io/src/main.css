@@ -50,3 +50,7 @@ img {
 h2, h4, p {
   color: rgb(27, 27, 27);
 }
+
+blockquote.blockquote:hover {
+  cursor: pointer;
+}

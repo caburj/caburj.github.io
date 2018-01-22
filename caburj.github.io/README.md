@@ -1,3 +1,3 @@
 # Remember
 
-After build, transfer the file to the root folder.
+after build, copy the files in build folder and replace those in the root.
